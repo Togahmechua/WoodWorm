@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerMovement : Controller
 {
-    private List<GameObject> obstacleList = new List<GameObject>();
-    private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
+    [SerializeField] private List<GameObject> obstacleList = new List<GameObject>();
+    [SerializeField] private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
 
     private bool isReadyToMove;
 
     void Start()
     {
-        //LoadObjList(LevelManager.Ins.level.GameObjList(), LevelManager.Ins.level.PushAbleGameObjList());
+        LoadObjList(LevelManager.Ins.level.GameObjList(), LevelManager.Ins.level.PushAbleGameObjList());
     }
 
     void Update()

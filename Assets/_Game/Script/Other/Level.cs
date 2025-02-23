@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Level : MonoBehaviour
@@ -10,8 +11,8 @@ public class Level : MonoBehaviour
     [SerializeField] private Transform obstacleHolder;
     [SerializeField] private Transform pushAbleHolder;
 
-    private List<GameObject> obstacleList = new List<GameObject>();
-    private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
+    [SerializeField] private List<GameObject> obstacleList = new List<GameObject>();
+    [SerializeField] private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
 
     private void Update()
     {
@@ -56,6 +57,25 @@ public class Level : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        
+        obstacleList.Clear();
+        pushAbleList.Clear();
+
+        for (int i = 0; i < obstacleHolder.childCount; i++)
+        {
+            GameObject obstacle = obstacleHolder.GetChild(i).gameObject;
+            if (obstacle != null)
+            {
+                obstacleList.Add(obstacle);
+            }
+        }
+
+        for (int i = 0; i < pushAbleHolder.childCount; i++)
+        {
+            PushAbleGameObj push = pushAbleHolder.GetChild(i).GetComponent<PushAbleGameObj>();
+            if (push != null)
+            {
+                pushAbleList.Add(push);
+            }    
+        }
     }
 }
