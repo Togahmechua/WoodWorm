@@ -14,6 +14,11 @@ public class Level : MonoBehaviour
     [SerializeField] private List<GameObject> obstacleList = new List<GameObject>();
     [SerializeField] private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
 
+    private void Start()
+    {
+        LoadList();
+    }
+
     private void Update()
     {
         if (!LevelManager.Ins.isWin)
@@ -55,7 +60,7 @@ public class Level : MonoBehaviour
         LevelManager.Ins.mapSO.LoadWinStates();
     }
 
-    private void OnDrawGizmosSelected()
+    private void LoadList()
     {
         obstacleList.Clear();
         pushAbleList.Clear();
