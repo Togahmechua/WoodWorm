@@ -11,8 +11,8 @@ public class Level : MonoBehaviour
     [SerializeField] private Transform obstacleHolder;
     [SerializeField] private Transform pushAbleHolder;
 
-    [SerializeField] private List<GameObject> obstacleList = new List<GameObject>();
-    [SerializeField] private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
+    private List<GameObject> obstacleList = new List<GameObject>();
+    private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
 
     private void Start()
     {
@@ -60,7 +60,7 @@ public class Level : MonoBehaviour
         LevelManager.Ins.mapSO.LoadWinStates();
     }
 
-    private void LoadList()
+    public void LoadList()
     {
         obstacleList.Clear();
         pushAbleList.Clear();

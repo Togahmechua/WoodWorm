@@ -4,20 +4,38 @@ using UnityEngine;
 
 public class PlayerMovement : Controller
 {
-    [SerializeField] private List<GameObject> obstacleList = new List<GameObject>();
-    [SerializeField] private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
     [SerializeField] private Transform model;
-    [SerializeField] private List<Transform> snakeBody = new List<Transform>();
+    [SerializeField] private EDirection eDirection;
+
+    private List<GameObject> obstacleList = new List<GameObject>();
+    private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
+    private List<Transform> snakeBody = new List<Transform>();
 
     private bool isReadyToMove;
     private List<Vector3> previousPositions = new List<Vector3>(); // 🔹 Lưu vị trí cũ để phần thân follow
     private List<Vector3> prePosOfHead = new List<Vector3>();
-    private Vector2 lastDirection = Vector2.right;
+    private Vector2 lastDirection;
     private Transform head;
     private int currentBodyIndex = 1;
-    private bool blockRight, blockLeft, blockUp;
+
     void Start()
     {
+        switch (eDirection)
+        {
+            case EDirection.Left:
+                lastDirection = Vector2.left;
+                break;
+            case EDirection.Right:
+                lastDirection = Vector2.right;
+                break;
+            case EDirection.Up:
+                lastDirection = Vector2.up;
+                break;
+            case EDirection.Down:
+                lastDirection = Vector2.down;
+                break;
+        }
+
         head = model.GetChild(0);
         LoadBody();
         LoadObjList(LevelManager.Ins.level.GameObjList(), LevelManager.Ins.level.PushAbleGameObjList());
@@ -40,21 +58,6 @@ public class PlayerMovement : Controller
         {
             isReadyToMove =  true;
         }
-    }
-
-    private void Check()
-    {
-        float rayLength = 0.51f;
-
-        RaycastHit2D rightHit = Physics2D.Raycast(transform.position, Vector2.right, rayLength);
-        RaycastHit2D leftHit = Physics2D.Raycast(transform.position, Vector2.left, rayLength);
-        RaycastHit2D upHit = Physics2D.Raycast(transform.position, Vector2.up, rayLength);
-
-        blockRight = rightHit.collider != null && rightHit.collider.CompareTag("Wall");
-        blockLeft = leftHit.collider != null && leftHit.collider.CompareTag("Wall");
-        blockUp = upHit.collider != null && upHit.collider.CompareTag("Wall");
-
-        Debug.Log($"Block Right: {blockRight}, Block Left: {blockLeft}, Block Up: {blockUp}");
     }
 
     public override void LoadObjList(List<GameObject> obstacleL, List<PushAbleGameObj> pushAbleL)
@@ -83,14 +86,6 @@ public class PlayerMovement : Controller
 
     public override bool Move(Vector2 direction)
     {
-        Check(); // Gọi Check trước khi di chuyển
-
-        if ((direction.x > 0 && blockRight) || (direction.x < 0 && blockLeft) || (direction.y > 0 && blockUp))
-        {
-            Debug.Log("Không thể di chuyển về hướng này!");
-            return false;
-        }
-
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y)) // Ưu tiên di chuyển ngang
         {
             direction.y = 0;
@@ -216,5 +211,21 @@ public class PlayerMovement : Controller
             fruit.Eat();
             InstantiateBody();
         }
+
+        WinBox box = Cache.GetWinBox(other);
+        if (box != null)
+        {
+            LevelManager.Ins.isWin = true;
+            UIManager.Ins.CloseUI<MainCanvas>();
+            UIManager.Ins.OpenUI<WinCanvas>();
+        }
     }
+}
+
+public enum EDirection
+{
+    Right,
+    Left,
+    Up,
+    Down
 }

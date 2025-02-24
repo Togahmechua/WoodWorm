@@ -6,9 +6,11 @@ public class PushAbleGameObj : Controller
 {
     private List<GameObject> obstacleList = new List<GameObject>();
     private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
+    private Rigidbody2D rb;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         LoadObjList(LevelManager.Ins.level.GameObjList(), LevelManager.Ins.level.PushAbleGameObjList());
     }
 
@@ -22,30 +24,21 @@ public class PushAbleGameObj : Controller
         float rayLength = 0.51f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, rayLength);
 
-        if (hit.collider != null)
+        if (hit.collider != null && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Fruit")))
         {
-            if (hit.collider.gameObject == this.gameObject)
-            {
-                Debug.Log("Raycast chạm chính nó, bỏ qua!");
-                return;
-            }
+            Vector3 roundedPos = new Vector3(
+                Mathf.Round(transform.position.x * 2) / 2,
+                Mathf.Round(transform.position.y * 2) / 2,
+                transform.position.z
+            );
 
-            //Debug.Log("Hit: " + hit.collider.gameObject.name);
+            rb.velocity = Vector2.zero;  // Dừng rơi
+            transform.position = roundedPos;  // Đặt về vị trí làm tròn
+            return;
+        }
 
-            if (hit.collider.CompareTag("Wall"))
-            {
-                //Debug.Log("Wall");
-                transform.position = new Vector3(  // 🔹 Làm tròn vị trí để không bị lệch
-                Mathf.Round(transform.position.x * 2) / 2, // Làm tròn theo bước 0.5
-                Mathf.Round(transform.position.y * 2) / 2,  // Làm tròn theo bước 0.5
-                transform.position.z);
-                return;
-            }
-        }
-        else
-        {
-            transform.position += Vector3.down * Time.deltaTime * 3f; // Di chuyển dần xuống
-        }
+        // Nếu không có vật cản, tiếp tục rơi
+        rb.velocity = Vector2.down * 3f;
     }
 
 
@@ -97,6 +90,6 @@ public class PushAbleGameObj : Controller
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawRay(transform.position, Vector3.down * 1f);
+        Gizmos.DrawRay(transform.position, Vector3.down * 0.51f);
     }
 }

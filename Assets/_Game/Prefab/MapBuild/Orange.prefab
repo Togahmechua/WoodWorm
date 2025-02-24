@@ -28,7 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7472634548113807561}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 5277670290393785140}
   m_Layer: 0
   m_Name: Orange
-  m_TagString: Untagged
+  m_TagString: Fruit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,7 +163,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.75}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!95 &6464735508864164812
 Animator:

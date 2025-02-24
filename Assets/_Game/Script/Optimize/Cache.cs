@@ -15,4 +15,16 @@ public class Cache
 
         return fruits[collider];
     }
+
+    private static Dictionary<Collider2D, WinBox> win = new Dictionary<Collider2D, WinBox>();
+
+    public static WinBox GetWinBox(Collider2D collider)
+    {
+        if (!win.ContainsKey(collider))
+        {
+            win.Add(collider, collider.GetComponent<WinBox>());
+        }
+
+        return win[collider];
+    }
 }

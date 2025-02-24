@@ -4,14 +4,7 @@ using UnityEngine;
 
 public class Fruit : MonoBehaviour
 {
-    [SerializeField] private int count;
-
-    private static int fruitCount;
-
-    private void Update()
-    {
-        count = fruitCount;
-    }
+    public static int fruitCount;
 
     public void Eat()
     {

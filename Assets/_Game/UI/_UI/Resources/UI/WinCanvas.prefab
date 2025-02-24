@@ -326,6 +326,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDestroyOnClose: 0
+  nextBtn: {fileID: 2531767796766292988}
+  menuBtn: {fileID: 6384035369392681006}
+  retryBtn: {fileID: 6944801246997718975}
+  soundBtn: {fileID: 1823015448443654234}
+  spr:
+  - {fileID: 21300000, guid: f3e467c254fc52949b4b48868185bde2, type: 3}
+  - {fileID: 21300000, guid: 20edb9a1e487d494a871a27c71058599, type: 3}
 --- !u!1 &5969722651462308264
 GameObject:
   m_ObjectHideFlags: 0
