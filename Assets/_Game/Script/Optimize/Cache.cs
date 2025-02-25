@@ -27,4 +27,16 @@ public class Cache
 
         return win[collider];
     }
+
+    private static Dictionary<Collider2D, PlayerMovement> player = new Dictionary<Collider2D, PlayerMovement>();
+
+    public static PlayerMovement GetPlayerMovement(Collider2D collider)
+    {
+        if (!player.ContainsKey(collider))
+        {
+            player.Add(collider, collider.GetComponent<PlayerMovement>());
+        }
+
+        return player[collider];
+    }
 }

@@ -10,8 +10,8 @@ public class AudioManager : Singleton<AudioManager>
 
     [Header("----- Audio Clip -----")]
     public AudioClip backgroundClip;
-    public AudioClip slash;
-    public AudioClip dead;
+    public AudioClip click;
+    public AudioClip win;
 
     private void Start()
     {

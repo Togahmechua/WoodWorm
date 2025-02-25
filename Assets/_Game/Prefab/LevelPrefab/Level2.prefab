@@ -258,6 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   eLevl: 2
+  player: {fileID: 6832709961050578102}
   obstacleHolder: {fileID: 5703593931077035654}
   pushAbleHolder: {fileID: 1336012249481522981}
 --- !u!1001 &99563281058239870
@@ -5923,6 +5924,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7953791126173379723, guid: cad3873c1705e9f4d90761fdf1a109a1, type: 3}
   m_PrefabInstance: {fileID: 7267743159065170614}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6832709961050578102 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4183453072274198016, guid: cad3873c1705e9f4d90761fdf1a109a1, type: 3}
+  m_PrefabInstance: {fileID: 7267743159065170614}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8fde17d2bccf7c40acdd6d636981e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7289533519180195753
 PrefabInstance:
   m_ObjectHideFlags: 0

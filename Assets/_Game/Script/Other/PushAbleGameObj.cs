@@ -6,49 +6,73 @@ public class PushAbleGameObj : Controller
 {
     private List<GameObject> obstacleList = new List<GameObject>();
     private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
-    private Rigidbody2D rb;
+    private bool isFalling = false;
+    private float fallDelay = 0.15f; // Thời gian giữa mỗi lần rơi
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         LoadObjList(LevelManager.Ins.level.GameObjList(), LevelManager.Ins.level.PushAbleGameObjList());
+        StartCoroutine(FallLoop());
     }
 
-    private void Update()
+    private IEnumerator FallLoop()
     {
-        Fall();
+        while (true)
+        {
+            yield return new WaitForSeconds(fallDelay);
+
+            // Nếu bên dưới là "Fruit" thì không rơi nữa
+            if (CheckBelowIsFruit())
+            {
+                isFalling = false;
+                AlignToGrid();
+                continue;
+            }
+
+            if (!Blocked(transform.position, Vector2.down))
+            {
+                Move(Vector2.down);
+                isFalling = true;
+            }
+            else
+            {
+                if (isFalling)
+                {
+                    isFalling = false;
+                    AlignToGrid();
+                }
+            }
+        }
     }
 
-    private void Fall()
+    private bool CheckBelowIsFruit()
     {
-        float rayLength = 0.51f;
+        float rayLength = 0.6f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, rayLength);
 
-        if (hit.collider != null && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Fruit")))
+        if (hit.collider != null && hit.collider.CompareTag("Fruit"))
         {
-            Vector3 roundedPos = new Vector3(
-                Mathf.Round(transform.position.x * 2) / 2,
-                Mathf.Round(transform.position.y * 2) / 2,
-                transform.position.z
-            );
-
-            rb.velocity = Vector2.zero;  // Dừng rơi
-            transform.position = roundedPos;  // Đặt về vị trí làm tròn
-            return;
+            return true;
         }
-
-        // Nếu không có vật cản, tiếp tục rơi
-        rb.velocity = Vector2.down * 3f;
+        return false;
     }
 
+    private void AlignToGrid()
+    {
+        transform.position = new Vector3(
+            Mathf.Round(transform.position.x * 2) / 2,
+            Mathf.Round(transform.position.y * 2) / 2,
+            transform.position.z
+        );
+    }
 
     public override void LoadObjList(List<GameObject> obstacleL, List<PushAbleGameObj> pushAbleL)
     {
         obstacleList.Clear();
         pushAbleList.Clear();
 
-        obstacleList = obstacleL;
-        pushAbleList = pushAbleL;
+        obstacleList = new List<GameObject>(obstacleL);
+        pushAbleList = new List<PushAbleGameObj>(pushAbleL);
     }
 
     public override bool Move(Vector2 direction)
@@ -64,21 +88,35 @@ public class PushAbleGameObj : Controller
         }
     }
 
-    public override bool Blocked(Vector3 postition, Vector2 direction)
+    public override bool Blocked(Vector3 position, Vector2 direction)
     {
-        Vector2 newPos = new Vector2(postition.x, postition.y) + direction;
+        Vector2 newPos = new Vector2(position.x, position.y) + direction;
 
-        foreach (var obj in obstacleList)
+        // Kiểm tra danh sách obstacleList
+        for (int i = obstacleList.Count - 1; i >= 0; i--)
         {
-            if (obj.transform.position.x == newPos.x && obj.transform.position.y == newPos.y)
+            if (obstacleList[i] == null)
+            {
+                obstacleList.RemoveAt(i);
+                continue;
+            }
+
+            if (obstacleList[i].transform.position.x == newPos.x && obstacleList[i].transform.position.y == newPos.y)
             {
                 return true;
             }
         }
 
-        foreach (PushAbleGameObj objToPush in pushAbleList)
+        // Kiểm tra danh sách pushAbleList
+        for (int i = pushAbleList.Count - 1; i >= 0; i--)
         {
-            if (objToPush.transform.position.x == newPos.x && objToPush.transform.position.y == newPos.y)
+            if (pushAbleList[i] == null)
+            {
+                pushAbleList.RemoveAt(i);
+                continue;
+            }
+
+            if (pushAbleList[i].transform.position.x == newPos.x && pushAbleList[i].transform.position.y == newPos.y)
             {
                 return true;
             }
@@ -87,9 +125,10 @@ public class PushAbleGameObj : Controller
         return false;
     }
 
+
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(transform.position, Vector3.down * 0.51f);
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, Vector3.down * 0.6f);
     }
 }

@@ -47,6 +47,7 @@ public class SpawnLevel : MonoBehaviour
                 : (levelBtn.id + 1).ToString();
 
                 levelBtn.btn.interactable = true;
+                levelBtn.PlayAnim();
             }
             else
             {

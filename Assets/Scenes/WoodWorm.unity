@@ -642,8 +642,8 @@ MonoBehaviour:
   musicSource: {fileID: 1862506299}
   sfxSource: {fileID: 1591943662}
   backgroundClip: {fileID: 0}
-  slash: {fileID: 0}
-  dead: {fileID: 0}
+  click: {fileID: 8300000, guid: 9a4e4706d688d04408a19aa488dd5d25, type: 3}
+  win: {fileID: 8300000, guid: b8a492ca9020e724f93a20ec162d22e0, type: 3}
 --- !u!1 &1222897896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,6 +1159,15 @@ MonoBehaviour:
   - {fileID: 7985869392586842041, guid: bb37a22e68f40624ba6255526b0abbe1, type: 3}
   - {fileID: 7101371469938202908, guid: e4da663f01cd1904da57f2a16f474c8f, type: 3}
   - {fileID: 2871439740754752195, guid: 6fa8d4fc773edcc46a2332862f20285d, type: 3}
+  - {fileID: 7354560383081810181, guid: 38efbced060073342b05a3133c1ca163, type: 3}
+  - {fileID: 9196385192417936937, guid: 1ed456ef5d390904fb31732169400d93, type: 3}
+  - {fileID: 963467126293700924, guid: 9c0dc7fcb5873374a91b0d36e91bca1d, type: 3}
+  - {fileID: 852120122383708746, guid: 35120554d40ff57409060a65d74b9641, type: 3}
+  - {fileID: 7829613391434848208, guid: ea88f527a44b56747b1141645f9540e0, type: 3}
+  - {fileID: 3384945071188422224, guid: 060b363f8266817489a1a89219889e4c, type: 3}
+  - {fileID: 1524674951334272942, guid: bf7dddf2d21ac7345953135a52527b62, type: 3}
+  - {fileID: 8681183861252554727, guid: 871d3e0519e998844bcace21dfa1927a, type: 3}
+  - {fileID: 2481196379745825502, guid: 3410b4586d5f8f243afe07f60587f233, type: 3}
   curMap: 0
   isWin: 0
   curMapID: 0

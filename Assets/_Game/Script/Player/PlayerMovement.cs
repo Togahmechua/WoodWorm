@@ -7,11 +7,11 @@ public class PlayerMovement : Controller
     [SerializeField] private Transform model;
     [SerializeField] private EDirection eDirection;
 
-    private List<GameObject> obstacleList = new List<GameObject>();
-    private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
+    [SerializeField] private List<GameObject> obstacleList = new List<GameObject>();
+    [SerializeField] private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
     private List<Transform> snakeBody = new List<Transform>();
 
-    private bool isReadyToMove;
+    private bool isReadyToMove = true;
     private List<Vector3> previousPositions = new List<Vector3>(); // 🔹 Lưu vị trí cũ để phần thân follow
     private List<Vector3> prePosOfHead = new List<Vector3>();
     private Vector2 lastDirection;
@@ -41,7 +41,7 @@ public class PlayerMovement : Controller
         LoadObjList(LevelManager.Ins.level.GameObjList(), LevelManager.Ins.level.PushAbleGameObjList());
     }
 
-    void Update()
+    /*void Update()
     {
         Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         moveInput.Normalize();
@@ -58,6 +58,25 @@ public class PlayerMovement : Controller
         {
             isReadyToMove =  true;
         }
+    }*/
+
+    public void OnMoveButton(Vector2 direction)
+    {
+        //Debug.Log("A");
+        if (isReadyToMove && !IsReverseMove(direction))
+        {
+            isReadyToMove = false;
+            Move(direction);
+
+            // Delay nhỏ để tránh spam liên tục
+            StartCoroutine(ResetMoveCooldown());
+        }
+    }
+
+    private IEnumerator ResetMoveCooldown()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isReadyToMove = true;
     }
 
     public override void LoadObjList(List<GameObject> obstacleL, List<PushAbleGameObj> pushAbleL)
@@ -86,6 +105,7 @@ public class PlayerMovement : Controller
 
     public override bool Move(Vector2 direction)
     {
+        //Debug.Log("B");
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y)) // Ưu tiên di chuyển ngang
         {
             direction.y = 0;
@@ -150,9 +170,9 @@ public class PlayerMovement : Controller
     }
 
 
-    public override bool Blocked(Vector3 postition, Vector2 direction)
+    public override bool Blocked(Vector3 position, Vector2 direction)
     {
-        Vector2 newPos = new Vector2(postition.x, postition.y) + direction;
+        Vector2 newPos = new Vector2(position.x, position.y) + direction;
         
         foreach (var obj in obstacleList)
         {

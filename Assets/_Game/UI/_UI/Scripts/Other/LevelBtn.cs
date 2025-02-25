@@ -12,6 +12,8 @@ public class LevelBtn : MonoBehaviour
     public Text txt;
     public Button btn;
 
+    [SerializeField] private Animator anim;
+
     private void Start()
     {
         btn.onClick.AddListener(LoadLevel);
@@ -19,8 +21,14 @@ public class LevelBtn : MonoBehaviour
 
     private void LoadLevel()
     {
+        AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
         LevelManager.Ins.LoadMapByID(id);
         UIManager.Ins.OpenUI<MainCanvas>();
         UIManager.Ins.CloseUI<ChooseLevelCanvas>();
+    }
+
+    public void PlayAnim()
+    {
+        anim.Play(CacheString.TAG_LVBTN);
     }
 }

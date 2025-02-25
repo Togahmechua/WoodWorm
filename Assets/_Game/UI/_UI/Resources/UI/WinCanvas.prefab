@@ -285,6 +285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2090216437796085177}
   - component: {fileID: 1755507281338693632}
+  - component: {fileID: 5178531747318200223}
   m_Layer: 5
   m_Name: WinCanvas
   m_TagString: Untagged
@@ -333,6 +334,27 @@ MonoBehaviour:
   spr:
   - {fileID: 21300000, guid: f3e467c254fc52949b4b48868185bde2, type: 3}
   - {fileID: 21300000, guid: 20edb9a1e487d494a871a27c71058599, type: 3}
+--- !u!95 &5178531747318200223
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799036144901307003}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e523d1248dfcf924684efbca1681aa4b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5969722651462308264
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +443,7 @@ GameObject:
   - component: {fileID: 1691250625946323250}
   - component: {fileID: 2531767796766292988}
   m_Layer: 5
-  m_Name: NextBtn
+  m_Name: Continue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

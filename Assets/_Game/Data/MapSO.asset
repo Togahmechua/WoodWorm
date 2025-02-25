@@ -35,3 +35,7 @@ MonoBehaviour:
     isWon: 0
   - eLevel: 11
     isWon: 0
+  - eLevel: 12
+    isWon: 0
+  - eLevel: 13
+    isWon: 0

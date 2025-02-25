@@ -1211,7 +1211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 3613632930969386400}
-  eDirection: 0
+  eDirection: 3
 --- !u!61 &7007383438147109124
 BoxCollider2D:
   m_ObjectHideFlags: 0

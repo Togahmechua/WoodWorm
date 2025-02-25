@@ -8,6 +8,8 @@ public class Level : MonoBehaviour
     public int id;
     public ELevel eLevl;
 
+    public PlayerMovement player;
+
     [SerializeField] private Transform obstacleHolder;
     [SerializeField] private Transform pushAbleHolder;
 
