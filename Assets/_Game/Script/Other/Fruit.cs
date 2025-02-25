@@ -18,6 +18,7 @@ public class Fruit : MonoBehaviour
 
     public void Eat()
     {
+        AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
         fruitCount++;
         ActiveOtherFruit();
         Destroy(gameObject);

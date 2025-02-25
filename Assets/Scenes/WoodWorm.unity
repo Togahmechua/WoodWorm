@@ -641,7 +641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1862506299}
   sfxSource: {fileID: 1591943662}
-  backgroundClip: {fileID: 0}
+  backgroundClip: {fileID: 8300000, guid: 67dfd18e68135cd4ca1a2bcd03034fa4, type: 3}
   click: {fileID: 8300000, guid: 9a4e4706d688d04408a19aa488dd5d25, type: 3}
   win: {fileID: 8300000, guid: b8a492ca9020e724f93a20ec162d22e0, type: 3}
 --- !u!1 &1222897896
@@ -982,7 +982,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
